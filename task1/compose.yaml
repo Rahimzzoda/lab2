@@ -1,0 +1,24 @@
+﻿# Docker Compose для лабораторной работы №2, задание 1
+# Вариант 8: связка worker1 -> worker2 через разделяемые тома
+
+services:
+  worker1:
+    build: ./worker1
+    container_name: worker1
+    volumes:
+      # data -> /var/data (откуда worker1 берёт исходные файлы)
+      - ./data:/var/data:ro
+      # result-1 -> /var/result (куда worker1 пишет промежуточный результат)
+      - ./result-1:/var/result
+
+  worker2:
+    build: ./worker2
+    container_name: worker2
+    volumes:
+      # result-1 -> /var/data (откуда worker2 читает промежуточный результат)
+      - ./result-1:/var/data:ro
+      # result -> /var/result (куда worker2 пишет финальный результат)
+      - ./result:/var/result
+    depends_on:
+      worker1:
+        condition: service_completed_successfully

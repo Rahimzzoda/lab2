@@ -1,0 +1,28 @@
+﻿# Docker Compose для Упражнения 2.2 (RabbitMQ)
+# Для 13 группы - язык Python, контейнер только для RabbitMQ
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      # AMQP-протокол (для подключения приложений)
+      - "5672:5672"
+      # Веб-интерфейс администрирования
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      # Данные RabbitMQ (сохраняются между перезапусками)
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  rabbitmq_data:
