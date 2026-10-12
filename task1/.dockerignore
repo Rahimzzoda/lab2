@@ -1,0 +1,21 @@
+﻿# Git
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Результаты
+result-1/
+result/
+
+# Документация
+README.md
+*.md

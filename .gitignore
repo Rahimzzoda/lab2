@@ -1,0 +1,25 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+
+# Результаты (генерируются)
+task1/result-1/*
+!task1/result-1/.gitkeep
+task1/result/*
+!task1/result/.gitkeep
